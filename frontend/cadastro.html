@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Fluminense FC</title>
+    <!-- Adicionando Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Adicionando Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para a página de cadastro */
+        .register-container {
+            min-height: calc(100vh - 165px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background-image: url('BackgroundLogin.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .register-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(135, 10, 40, 0.7); /* Overlay grená com transparência */
+            z-index: 1;
+        }
+
+        .register-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 580px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .register-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #00613C 0%, #870A28 100%);
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .register-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .register-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #00613C;
+            margin: 0 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .register-subtitle {
+            color: #666;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f8f8f8;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #00613C;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(0, 97, 60, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #999;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #00613C;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .terms-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #00613C;
+            margin-top: 3px;
+        }
+
+        .terms-checkbox label {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .terms-checkbox a {
+            color: #00613C;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .terms-checkbox a:hover {
+            color: #870A28;
+            text-decoration: underline;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00613C 0%, #007a4d 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 97, 60, 0.3);
+        }
+
+        .register-button:active {
+            transform: translateY(0);
+        }
+
+        .register-divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            color: #666;
+        }
+
+        .register-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #e0e0e0;
+        }
+
+        .register-divider span {
+            background-color: white;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #870A28;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #00613C;
+            text-decoration: underline;
+        }
+
+        .back-to-home {
+            position: fixed; /* <-- Mude de absolute para fixed */
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* Garante que fique acima de tudo */
+        }
+
+        .back-to-home:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .back-to-home i {
+            color: #00613C;
+            font-size: 18px;
+        }
+
+        .password-strength {
+            height: 5px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .password-strength-text {
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: right;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .register-card {
+                margin: 20px;
+                padding: 30px 25px;
+            }
+            
+            .register-title {
+                font-size: 24px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body class="cadastro-page">
+    <button class="back-to-home" onclick="window.location.href='index.html'" aria-label="Voltar para a página inicial">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <div class="register-container">
+        <div class="register-card">
+            <div class="register-header">
+                <img src="flu.png" alt="Escudo Fluminense FC" class="register-logo">
+                <h1 class="register-title">Criar Conta</h1>
+                <p class="register-subtitle">Junte-se à família tricolor</p>
+            </div>
+
+            <form class="register-form" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">Nome</label>
+                        <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Digite seu nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Sobrenome</label>
+                        <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Digite seu sobrenome" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="Digite seu e-mail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">Telefone</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="(00) 00000-0000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address" class="form-label">Endereço</label>
+                    <input type="text" id="address" name="address" class="form-input" placeholder="Rua Exemplo 123" required>
+                </div>
+
+                <div class="form-group" style="position: relative;">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Crie uma senha forte" required onkeyup="checkPasswordStrength()">
+                    <button type="button" class="password-toggle" onclick="togglePassword('password', 'passwordIcon')">
+                        <i class="fas fa-eye" id="passwordIcon"></i>
+                    </button>
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                    </div>
+                    <div class="password-strength-text" id="passwordStrengthText"></div>
+                </div>
+
+                <div class="form-group" style="position: relative;">
+                    <label for="confirmPassword" class="form-label">Confirmar Senha</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirme sua senha" required onkeyup="checkPasswordMatch()">
+                    <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', 'confirmPasswordIcon')">
+                        <i class="fas fa-eye" id="confirmPasswordIcon"></i>
+                    </button>
+                    <div class="password-strength-text" id="passwordMatchText"></div>
+                </div>
+
+
+
+                <button type="submit" class="register-button">
+                    <i class="fas fa-user-plus" style="margin-right: 10px;"></i>
+                    Criar Conta
+                </button>
+            </form>
+
+            <div class="register-divider">
+                <span>ou</span>
+            </div>
+
+            <div class="login-link">
+                <p>Já tem uma conta? <a href="login.html">Fazer login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const passwordIcon = document.getElementById(iconId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+            }
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthBar = document.getElementById('passwordStrengthBar');
+            const strengthText = document.getElementById('passwordStrengthText');
+            
+            // Critérios de força da senha
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const isLongEnough = password.length >= 8;
+            
+            let strength = 0;
+            if (hasLowerCase) strength += 1;
+            if (hasUpperCase) strength += 1;
+            if (hasNumber) strength += 1;
+            if (hasSpecialChar) strength += 1;
+            if (isLongEnough) strength += 1;
+            
+            // Atualiza a barra de força
+            let percentage = (strength / 5) * 100;
+            strengthBar.style.width = `${percentage}%`;
+            
+            // Define a cor e o texto com base na força
+            if (password === '') {
+                strengthBar.style.backgroundColor = '#e0e0e0';
+                strengthText.textContent = '';
+                strengthText.style.color = '#666';
+            } else if (percentage <= 20) {
+                strengthBar.style.backgroundColor = '#ff4d4d';
+                strengthText.textContent = 'Muito fraca';
+                strengthText.style.color = '#ff4d4d';
+            } else if (percentage <= 40) {
+                strengthBar.style.backgroundColor = '#ffa64d';
+                strengthText.textContent = 'Fraca';
+                strengthText.style.color = '#ffa64d';
+            } else if (percentage <= 60) {
+                strengthBar.style.backgroundColor = '#ffff4d';
+                strengthText.textContent = 'Média';
+                strengthText.style.color = '#aaaa00';
+            } else if (percentage <= 80) {
+                strengthBar.style.backgroundColor = '#4dff4d';
+                strengthText.textContent = 'Forte';
+                strengthText.style.color = '#4dff4d';
+            } else {
+                strengthBar.style.backgroundColor = '#00cc00';
+                strengthText.textContent = 'Muito forte';
+                strengthText.style.color = '#00cc00';
+            }
+        }
+
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const matchText = document.getElementById('passwordMatchText');
+            
+            if (confirmPassword === '') {
+                matchText.textContent = '';
+                matchText.style.color = '#666';
+            } else if (password === confirmPassword) {
+                matchText.textContent = 'Senhas conferem';
+                matchText.style.color = '#00cc00';
+            } else {
+                matchText.textContent = 'Senhas não conferem';
+                matchText.style.color = '#ff4d4d';
+            }
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Verifica se as senhas conferem
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('As senhas não conferem. Por favor, verifique.');
+                return;
+            }
+            
+            // Integração com API de cadastro
+            const formData = {
+                nome: document.getElementById('firstName').value,
+                sobrenome: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                telefone: document.getElementById('phone').value,
+                endereco: document.getElementById('address').value,
+                senha: document.getElementById('password').value
+            };
+            
+            const registerButton = document.querySelector('.register-button');
+            const originalText = registerButton.innerHTML;
+            
+            // Mostrar loading
+            registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Criando conta...';
+            registerButton.disabled = true;
+            
+            try {
+                const response = await criarConta(formData.nome, formData.sobrenome, formData.email, formData.telefone, formData.endereco, formData.senha);
+                alert('Cadastro realizado com sucesso! Faça login para continuar.');
+                window.location.href = 'login.html';
+            } catch (error) {
+                alert('Erro no cadastro: ' + error.message);
+                
+                // Restaurar botão
+                registerButton.innerHTML = originalText;
+                registerButton.disabled = false;
+            }
+        });
+
+        // Adiciona efeito de foco nos inputs
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Máscara para o campo de telefone
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 0) {
+                value = '(' + value;
+                
+                if (value.length > 3) {
+                    value = value.substring(0, 3) + ') ' + value.substring(3);
+                }
+                
+                if (value.length > 10) {
+                    value = value.substring(0, 10) + '-' + value.substring(10);
+                }
+                
+                if (value.length > 15) {
+                    value = value.substring(0, 15);
+                }
+            }
+            
+            e.target.value = value;
+        });
+    </script>
+    <script src="auth.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clube - Fluminense FC</title>
+    <!-- Adicionando Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Adicionando Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-top">
+            <div class="canais-sociais">
+                <span>CANAIS OFICIAIS</span>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/fluminensefc/" target="_blank" aria-label="Instagram do Fluminense"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/fluminensefc" target="_blank" aria-label="X (Twitter ) do Fluminense"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/user/fluminensefc" target="_blank" aria-label="YouTube do Fluminense"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="user-actions">
+                <button id="profile-icon" aria-label="Menu do usuário"><i class="fas fa-user-circle"></i></button>
+                <div class="profile-menu" id="profile-menu">
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Fazer login</a>
+                    <a href="cadastro.html"><i class="fas fa-user-plus"></i> Fazer Cadastro</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle">
+            <img class="logo-flu" src="flu.png" alt="Escudo Fluminense FC">
+            <span class="site-title">FLUMINENSE FC</span>
+        </div>
+        <nav class="header-bottom">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i>HOME</a></li>
+                <li><a href="noticias.html"><i class="fas fa-newspaper"></i>NOTÍCIAS</a></li>
+                <li><a href="futebol.html"><i class="fas fa-futbol"></i>FUTEBOL</a></li>
+                <li><a href="loja.html"><i class="fas fa-shopping-cart"></i>LOJA</a></li>
+                <li><a href="clube.html" class="active"><i class="fas fa-shield-alt"></i>CLUBE</a></li>
+                <li><a href="admin.html" id="admin-link" style="display: none;"><i class="fas fa-cog"></i>ADMIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <main class="main-content">
+            <section class="page-header">
+                <h1 class="page-title">O Clube</h1>
+                <p class="page-subtitle">Conheça a história e estrutura do Tricolor das Laranjeiras</p>
+            </section>
+
+            <!-- Navegação das seções do clube -->
+            <section class="club-nav">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="historia">História</button>
+                    <button class="tab-btn" data-tab="estrutura">Estrutura</button>
+                    <button class="tab-btn" data-tab="titulos">Títulos</button>
+                    <button class="tab-btn" data-tab="diretoria">Diretoria</button>
+                    <button class="tab-btn" data-tab="social">Responsabilidade Social</button>
+                </div>
+            </section>
+
+            <!-- Seção História -->
+            <section class="tab-content active" id="historia">
+                <div class="history-section">
+                    <div class="history-hero">
+                        <div class="history-content">
+                            <h2>Mais de 120 Anos de História</h2>
+                            <p class="history-intro">
+                                Fundado em 21 de julho de 1902, o Fluminense Football Club é um dos clubes mais tradicionais e vitoriosos do futebol brasileiro. 
+                                Conhecido como "Tricolor das Laranjeiras", o clube nasceu no bairro das Laranjeiras, no Rio de Janeiro, e desde então se tornou 
+                                uma das maiores paixões do povo carioca e brasileiro.
+                            </p>
+                        </div>
+                        <div class="history-image">
+                            <img src="flu.png" alt="Escudo histórico do Fluminense">
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <h3>Marcos Históricos</h3>
+                        <div class="timeline-item">
+                            <div class="timeline-year">1902</div>
+                            <div class="timeline-content">
+                                <h4>Fundação do Clube</h4>
+                                <p>O Fluminense Football Club é fundado por Oscar Cox no bairro das Laranjeiras.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">1906</div>
+                            <div class="timeline-content">
+                                <h4>Primeiro Título Carioca</h4>
+                                <p>Conquista do primeiro Campeonato Carioca, iniciando uma era de sucessos.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">1984</div>
+                            <div class="timeline-content">
+                                <h4>Primeiro Brasileiro</h4>
+                                <p>Conquista do primeiro Campeonato Brasileiro, com uma campanha histórica.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">2023</div>
+                            <div class="timeline-content">
+                                <h4>Libertadores da América</h4>
+                                <p>Conquista inédita da Copa Libertadores, o maior título da história do clube.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="traditions">
+                        <h3>Tradições e Símbolos</h3>
+                        <div class="traditions-grid">
+                            <div class="tradition-item">
+                                <i class="fas fa-tshirt"></i>
+                                <h4>As Cores Tricolores</h4>
+                                <p>Verde, grená e branco representam a tradição e elegância do clube desde sua fundação.</p>
+                            </div>
+                            <div class="tradition-item">
+                                <i class="fas fa-music"></i>
+                                <h4>Hino Oficial</h4>
+                                <p>Composto por Lamartine Babo, é um dos hinos mais conhecidos do futebol brasileiro.</p>
+                            </div>
+                            <div class="tradition-item">
+                                <i class="fas fa-heart"></i>
+                                <h4>Torcida Apaixonada</h4>
+                                <p>Uma das torcidas mais fiéis e tradicionais do Brasil, presente em todos os momentos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Estrutura -->
+            <section class="tab-content" id="estrutura">
+                <div class="structure-section">
+                    <h2>Estrutura do Clube</h2>
+                    
+                    <div class="facilities-grid">
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3>Sede Social</h3>
+                            <p>Localizada nas Laranjeiras, a sede social do Fluminense é um patrimônio histórico do Rio de Janeiro, 
+                               oferecendo diversas atividades sociais e culturais para os associados.</p>
+                            <div class="facility-details">
+                                <span><i class="fas fa-map-marker-alt"></i> Laranjeiras - Rio de Janeiro</span>
+                                <span><i class="fas fa-calendar"></i> Fundada em 1902</span>
+                            </div>
+                        </div>
+
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-futbol"></i>
+                            </div>
+                            <h3>CT Carlos Castilho</h3>
+                            <p>Centro de treinamento moderno e completo, onde o elenco profissional e as categorias de base 
+                               se preparam diariamente. Equipado com a mais alta tecnologia.</p>
+                            <div class="facility-details">
+                                <span><i class="fas fa-map-marker-alt"></i> Xerém - Duque de Caxias</span>
+                                <span><i class="fas fa-ruler"></i> 140 mil m²</span>
+                            </div>
+                        </div>
+
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-stadium"></i>
+                            </div>
+                            <h3>Estádio Maracanã</h3>
+                            <p>Casa do Fluminense desde 1950, o Maracanã é palco dos principais jogos do Tricolor. 
+                               O templo do futebol mundial recebe a torcida tricolor em grandes partidas.</p>
+                            <div class="facility-details">
+                                <span><i class="fas fa-map-marker-alt"></i> Maracanã - Rio de Janeiro</span>
+                                <span><i class="fas fa-users"></i> Capacidade: 78.838</span>
+                            </div>
+                        </div>
+
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Categorias de Base</h3>
+                            <p>Uma das melhores formações de jovens talentos do Brasil, revelando grandes jogadores 
+                               que brilham no futebol nacional e internacional.</p>
+                            <div class="facility-details">
+                                <span><i class="fas fa-trophy"></i> Diversos títulos</span>
+                                <span><i class="fas fa-star"></i> Revelação de talentos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="departments">
+                        <h3>Departamentos</h3>
+                        <div class="departments-list">
+                            <div class="department-item">
+                                <h4>Futebol Profissional</h4>
+                                <p>Gestão completa do elenco principal masculino</p>
+                            </div>
+                            <div class="department-item">
+                                <h4>Futebol Feminino</h4>
+                                <p>Desenvolvimento do futebol feminino tricolor</p>
+                            </div>
+                            <div class="department-item">
+                                <h4>Categorias de Base</h4>
+                                <p>Formação de jovens talentos do Sub-11 ao Sub-20</p>
+                            </div>
+                            <div class="department-item">
+                                <h4>Departamento Médico</h4>
+                                <p>Cuidados com a saúde e preparação física dos atletas</p>
+                            </div>
+                            <div class="department-item">
+                                <h4>Marketing e Comunicação</h4>
+                                <p>Gestão da marca e relacionamento com torcedores</p>
+                            </div>
+                            <div class="department-item">
+                                <h4>Administrativo</h4>
+                                <p>Gestão financeira e administrativa do clube</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Títulos -->
+            <section class="tab-content" id="titulos">
+                <div class="titles-section">
+                    <h2>Conquistas e Títulos</h2>
+                    
+                    <div class="titles-summary">
+                        <div class="title-stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Títulos Oficiais</div>
+                        </div>
+                        <div class="title-stat">
+                            <div class="stat-number">32</div>
+                            <div class="stat-label">Campeonatos Cariocas</div>
+                        </div>
+                        <div class="title-stat">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">Campeonatos Brasileiros</div>
+                        </div>
+                        <div class="title-stat">
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Copa Libertadores</div>
+                        </div>
+                    </div>
+
+                    <div class="titles-categories">
+                        <div class="title-category">
+                            <h3><i class="fas fa-globe-americas"></i> Títulos Internacionais</h3>
+                            <ul>
+                                <li>Copa Libertadores da América (2023)</li>
+                                <li>Recopa Sul-Americana (2024)</li>
+                            </ul>
+                        </div>
+
+                        <div class="title-category">
+                            <h3><i class="fas fa-flag"></i> Títulos Nacionais</h3>
+                            <ul>
+                                <li>Campeonato Brasileiro (1984, 2010, 2012, 2024)</li>
+                                <li>Copa do Brasil (2007, 2024)</li>
+                                <li>Primeira Liga (2016)</li>
+                            </ul>
+                        </div>
+
+                        <div class="title-category">
+                            <h3><i class="fas fa-map-marker-alt"></i> Títulos Estaduais</h3>
+                            <ul>
+                                <li>Campeonato Carioca (32 títulos)</li>
+                                <li>Taça Guanabara (múltiplas conquistas)</li>
+                                <li>Taça Rio (múltiplas conquistas)</li>
+                            </ul>
+                        </div>
+
+                        <div class="title-category">
+                            <h3><i class="fas fa-users"></i> Categorias de Base</h3>
+                            <ul>
+                                <li>Copa São Paulo de Futebol Júnior (1971, 1973, 1977, 1986, 1989)</li>
+                                <li>Campeonato Brasileiro Sub-20 (múltiplas conquistas)</li>
+                                <li>Campeonato Carioca de Juniores (múltiplas conquistas)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Diretoria -->
+            <section class="tab-content" id="diretoria">
+                <div class="board-section">
+                    <h2>Diretoria Executiva</h2>
+                    
+                    <div class="board-grid">
+                        <div class="board-member">
+                            <div class="member-photo">
+                                <img src="flu.png" alt="Mário Bittencourt">
+                            </div>
+                            <div class="member-info">
+                                <h3>Mário Bittencourt</h3>
+                                <p class="member-role">Presidente</p>
+                                <p class="member-description">
+                                    Líder da atual gestão, responsável pela modernização e profissionalização do clube.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="board-member">
+                            <div class="member-photo">
+                                <img src="flu.png" alt="Paulo Angioni">
+                            </div>
+                            <div class="member-info">
+                                <h3>Paulo Angioni</h3>
+                                <p class="member-role">Vice-Presidente de Futebol</p>
+                                <p class="member-description">
+                                    Responsável pela gestão do departamento de futebol profissional e categorias de base.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="board-member">
+                            <div class="member-photo">
+                                <img src="flu.png" alt="Diretora Financeira">
+                            </div>
+                            <div class="member-info">
+                                <h3>Diretoria Financeira</h3>
+                                <p class="member-role">Vice-Presidente Financeiro</p>
+                                <p class="member-description">
+                                    Gestão financeira e administrativa, buscando o equilíbrio das contas do clube.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="governance">
+                        <h3>Governança</h3>
+                        <div class="governance-info">
+                            <p>
+                                O Fluminense adota práticas modernas de governança corporativa, com transparência 
+                                na gestão e prestação de contas regular aos associados. O clube busca constantemente 
+                                a profissionalização de seus processos e a sustentabilidade financeira.
+                            </p>
+                            
+                            <div class="governance-principles">
+                                <div class="principle">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Transparência</span>
+                                </div>
+                                <div class="principle">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <span>Responsabilidade</span>
+                                </div>
+                                <div class="principle">
+                                    <i class="fas fa-handshake"></i>
+                                    <span>Integridade</span>
+                                </div>
+                                <div class="principle">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Sustentabilidade</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Responsabilidade Social -->
+            <section class="tab-content" id="social">
+                <div class="social-section">
+                    <h2>Responsabilidade Social</h2>
+                    
+                    <div class="social-intro">
+                        <p>
+                            O Fluminense acredita que o futebol tem o poder de transformar vidas e comunidades. 
+                            Por isso, desenvolve diversos projetos sociais que levam educação, esporte e cidadania 
+                            para crianças e jovens em situação de vulnerabilidade social.
+                        </p>
+                    </div>
+
+                    <div class="social-projects">
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Projeto Guerreiros</h3>
+                            <p>
+                                Programa de formação esportiva e educacional para jovens de comunidades carentes, 
+                                oferecendo oportunidades através do futebol e da educação.
+                            </p>
+                            <div class="project-stats">
+                                <span>500+ jovens atendidos</span>
+                                <span>15 comunidades</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3>Flu Solidário</h3>
+                            <p>
+                                Campanhas de arrecadação e distribuição de alimentos, roupas e materiais escolares 
+                                para famílias em situação de vulnerabilidade.
+                            </p>
+                            <div class="project-stats">
+                                <span>1000+ famílias beneficiadas</span>
+                                <span>Campanhas mensais</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3>Sustentabilidade</h3>
+                            <p>
+                                Iniciativas de preservação ambiental, incluindo programas de reciclagem, 
+                                uso consciente de recursos e educação ambiental.
+                            </p>
+                            <div class="project-stats">
+                                <span>Carbono neutro</span>
+                                <span>Energia renovável</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Inclusão Social</h3>
+                            <p>
+                                Programas de inclusão para pessoas com deficiência, promovendo acessibilidade 
+                                e oportunidades iguais no esporte e na sociedade.
+                            </p>
+                            <div class="project-stats">
+                                <span>Acessibilidade total</span>
+                                <span>Programas inclusivos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="partnerships">
+                        <h3>Parcerias</h3>
+                        <p>
+                            O Fluminense mantém parcerias com ONGs, instituições governamentais e empresas 
+                            privadas para ampliar o alcance de seus projetos sociais e maximizar o impacto 
+                            positivo na comunidade.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="results-sidebar">
+            <h2>INFORMAÇÕES:</h2>
+            <div class="info-card">
+                <h3>Contato</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> (21) 2234-5678</p>
+                    <p><i class="fas fa-envelope"></i> contato@fluminense.com.br</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Laranjeiras - Rio de Janeiro</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Horário de Funcionamento</h3>
+                <div class="schedule-info">
+                    <p>Segunda a Sexta: 9h às 18h</p>
+                    <p>Sábado: 9h às 14h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+    <script src="auth.js"></script>
+

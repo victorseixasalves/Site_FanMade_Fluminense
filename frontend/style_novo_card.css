@@ -1,0 +1,271 @@
+/* Novo estilo para os cards dos jogadores baseado na imagem de referência */
+
+.player-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    border: 2px solid transparent;
+    height: 400px; /* Altura fixa para consistência */
+}
+
+.player-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    border-color: #00613C;
+}
+
+.player-image {
+    position: relative;
+    height: 280px; /* Aumentado para dar mais espaço ao jogador */
+    background-image: url('SiteFLU.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end; /* Posiciona o jogador na parte inferior */
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Overlay com gradiente intercalando grená e verde */
+.player-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(135, 10, 40, 0.7) 0%,    /* Grená */
+        rgba(0, 97, 60, 0.7) 25%,     /* Verde */
+        rgba(135, 10, 40, 0.6) 50%,   /* Grená mais claro */
+        rgba(0, 97, 60, 0.6) 75%,     /* Verde mais claro */
+        rgba(135, 10, 40, 0.7) 100%   /* Grená */
+    );
+    z-index: 1;
+}
+
+.player-image img {
+    width: 180px; /* Aumentado significativamente */
+    height: 180px; /* Aumentado significativamente */
+    border-radius: 50%;
+    border: 4px solid white;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    z-index: 2;
+    position: relative;
+    margin-bottom: 20px; /* Espaço da borda inferior */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.player-card:hover .player-image img {
+    transform: scale(1.1);
+    border-width: 6px;
+}
+
+.player-number {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #00613C;
+    width: 45px; /* Ligeiramente maior */
+    height: 45px; /* Ligeiramente maior */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px; /* Fonte maior */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    border: 2px solid rgba(0, 97, 60, 0.3);
+}
+
+.player-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg, 
+        rgba(0, 97, 60, 0.95) 0%, 
+        rgba(135, 10, 40, 0.95) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    z-index: 4;
+}
+
+.player-card:hover .player-overlay {
+    opacity: 1;
+}
+
+.player-stats-detailed {
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.player-stats-detailed h4 {
+    font-size: 26px; /* Ligeiramente maior */
+    font-weight: 700;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.stat-value {
+    display: block;
+    font-size: 26px; /* Ligeiramente maior */
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.stat-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+.player-info {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    height: 120px; /* Altura fixa para a seção de informações */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.player-name {
+    font-size: 22px; /* Ligeiramente maior */
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.player-position {
+    font-size: 15px; /* Ligeiramente maior */
+    color: #00613C;
+    font-weight: 600;
+    margin: 0 0 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.player-basic-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 13px;
+    color: #666;
+}
+
+.player-basic-stats span {
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+    border-radius: 15px;
+    font-weight: 500;
+    border: 1px solid rgba(0, 97, 60, 0.1);
+}
+
+/* Animações para filtros */
+.player-card.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.player-card.visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .player-card {
+        height: 350px;
+    }
+    
+    .player-image {
+        height: 230px;
+    }
+    
+    .player-image img {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .player-info {
+        height: 120px;
+        padding: 15px;
+    }
+    
+    .player-name {
+        font-size: 18px;
+    }
+    
+    .player-stats-detailed h4 {
+        font-size: 22px;
+    }
+    
+    .stat-value {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .player-card {
+        height: 320px;
+    }
+    
+    .player-image {
+        height: 200px;
+    }
+    
+    .player-image img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .player-number {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+}
+

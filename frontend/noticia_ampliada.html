@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícia - Fluminense FC</title>
+    <!-- Adicionando Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Adicionando Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .article-header {
+            margin-bottom: 30px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .article-category {
+            background: #8B0000;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .article-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #8B0000;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .article-summary {
+            font-size: 1.1em;
+            color: #555;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #8B0000;
+            border-radius: 5px;
+        }
+
+        .article-image {
+            width: 100%;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .article-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content p:first-child {
+            font-size: 1.15em;
+            font-weight: 500;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #8B0000;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: #660000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
+        }
+
+        .share-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+
+        .share-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #8B0000;
+            margin-bottom: 15px;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .share-btn.facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        .share-btn.twitter {
+            background: #1da1f2;
+            color: white;
+        }
+
+        .share-btn.whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #d32f2f;
+            background: #ffebee;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .article-title {
+                font-size: 1.8em;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .share-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-top">
+            <div class="canais-sociais">
+                <span>CANAIS OFICIAIS</span>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/fluminensefc/" target="_blank" aria-label="Instagram do Fluminense"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/fluminensefc" target="_blank" aria-label="X (Twitter ) do Fluminense"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/user/fluminensefc" target="_blank" aria-label="YouTube do Fluminense"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="user-actions">
+                <button id="profile-icon" aria-label="Menu do usuário"><i class="fas fa-user-circle"></i></button>
+                <div class="profile-menu" id="profile-menu">
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Fazer login</a>
+                    <a href="cadastro.html"><i class="fas fa-user-plus"></i> Fazer Cadastro</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle">
+            <img class="logo-flu" src="flu.png" alt="Escudo Fluminense FC">
+            <span class="site-title">FLUMINENSE FC</span>
+        </div>
+        <nav class="header-bottom">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i>HOME</a></li>
+                <li><a href="noticias.html" class="active"><i class="fas fa-newspaper"></i>NOTÍCIAS</a></li>
+                <li><a href="futebol.html"><i class="fas fa-futbol"></i>FUTEBOL</a></li>
+                <li><a href="loja.html"><i class="fas fa-shopping-cart"></i>LOJA</a></li>
+                <li><a href="clube.html"><i class="fas fa-shield-alt"></i>CLUBE</a></li>
+                <li><a href="admin.html" id="admin-link" style="display: none;"><i class="fas fa-cog"></i>ADMIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <main class="main-content">
+            <a href="noticias.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Voltar para Notícias
+            </a>
+
+            <div id="loading" class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                Carregando notícia...
+            </div>
+
+            <div id="error" class="error" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Erro ao carregar notícia</h3>
+                <p>Não foi possível carregar o conteúdo da notícia. Tente novamente mais tarde.</p>
+            </div>
+
+            <article id="article-content" class="article-container" style="display: none;">
+                <header class="article-header">
+                    <div class="article-meta">
+                        <div class="article-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span id="article-date"></span>
+                        </div>
+                        <div class="article-category" id="article-category"></div>
+                    </div>
+                    <h1 class="article-title" id="article-title"></h1>
+                    <div class="article-summary" id="article-summary"></div>
+                </header>
+
+                <div class="article-image" id="article-image-container">
+                    <img id="article-image" src="" alt="">
+                </div>
+
+                <div class="article-content" id="article-text"></div>
+
+                <div class="share-section">
+                    <h3 class="share-title">Compartilhar esta notícia</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn facebook" id="share-facebook">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook
+                        </a>
+                        <a href="#" class="share-btn twitter" id="share-twitter">
+                            <i class="fab fa-twitter"></i>
+                            Twitter
+                        </a>
+                        <a href="#" class="share-btn whatsapp" id="share-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Função para obter parâmetros da URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Função para formatar data
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        // Função para carregar a notícia
+        async function loadNoticia() {
+            const noticiaId = getUrlParameter('id');
+            
+            if (!noticiaId) {
+                showError('ID da notícia não fornecido');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost/SiteFlu_Clean/backend/noticias.php?id=' + noticiaId);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    displayNoticia(data.data);
+                } else {
+                    showError(data.error || 'Notícia não encontrada');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar notícia:', error);
+                showError('Erro de conexão. Tente novamente mais tarde.');
+            }
+        }
+
+        // Função para exibir a notícia
+        function displayNoticia(noticia) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('article-content').style.display = 'block';
+
+            // Preencher dados da notícia
+            document.getElementById('article-date').textContent = formatDate(noticia.data);
+            document.getElementById('article-category').textContent = noticia.tema.toUpperCase();
+            document.getElementById('article-title').textContent = noticia.titulo;
+            document.getElementById('article-summary').textContent = noticia.texto_resumido;
+
+            // Configurar imagem
+            const imagePath = `imagens_noticias/${noticia.imagem_capa}`;
+            document.getElementById('article-image').src = imagePath;
+            document.getElementById('article-image').alt = noticia.titulo;
+
+            // Configurar conteúdo (converter quebras de linha em parágrafos)
+            const paragraphs = noticia.texto_noticia.split('\n\n');
+            const contentHtml = paragraphs.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+            document.getElementById('article-text').innerHTML = contentHtml;
+
+            // Configurar botões de compartilhamento
+            setupShareButtons(noticia);
+
+            // Atualizar título da página
+            document.title = `${noticia.titulo} - Fluminense FC`;
+        }
+
+        // Função para configurar botões de compartilhamento
+        function setupShareButtons(noticia) {
+            const currentUrl = window.location.href;
+            const title = noticia.titulo;
+            const text = noticia.texto_resumido;
+
+            // Facebook
+            document.getElementById('share-facebook').href = 
+                `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+
+            // Twitter
+            document.getElementById('share-twitter').href = 
+                `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(currentUrl)}`;
+
+            // WhatsApp
+            document.getElementById('share-whatsapp').href = 
+                `https://wa.me/?text=${encodeURIComponent(title + ' - ' + currentUrl)}`;
+        }
+
+        // Função para exibir erro
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            document.querySelector('#error p').textContent = message;
+        }
+
+        // Carregar notícia quando a página carregar
+        document.addEventListener('DOMContentLoaded', loadNoticia);
+    </script>
+</body>
+</html>
+

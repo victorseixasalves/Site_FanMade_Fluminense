@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias - Fluminense FC</title>
+    <!-- Adicionando Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Adicionando Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-top">
+            <div class="canais-sociais">
+                <span>CANAIS OFICIAIS</span>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/fluminensefc/" target="_blank" aria-label="Instagram do Fluminense"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/fluminensefc" target="_blank" aria-label="X (Twitter ) do Fluminense"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/user/fluminensefc" target="_blank" aria-label="YouTube do Fluminense"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="user-actions">
+                <button id="profile-icon" aria-label="Menu do usuário"><i class="fas fa-user-circle"></i></button>
+                <div class="profile-menu" id="profile-menu">
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Fazer login</a>
+                    <a href="cadastro.html"><i class="fas fa-user-plus"></i> Fazer Cadastro</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle">
+            <img class="logo-flu" src="flu.png" alt="Escudo Fluminense FC">
+            <span class="site-title">FLUMINENSE FC</span>
+        </div>
+        <nav class="header-bottom">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i>HOME</a></li>
+                <li><a href="noticias.html" class="active"><i class="fas fa-newspaper"></i>NOTÍCIAS</a></li>
+                <li><a href="futebol.html"><i class="fas fa-futbol"></i>FUTEBOL</a></li>
+                <li><a href="loja.html"><i class="fas fa-shopping-cart"></i>LOJA</a></li>
+                <li><a href="clube.html"><i class="fas fa-shield-alt"></i>CLUBE</a></li>
+                <li><a href="admin.html" id="admin-link" style="display: none;"><i class="fas fa-cog"></i>ADMIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <main class="main-content">
+            <section class="page-header">
+                <h1 class="page-title">Notícias</h1>
+                <p class="page-subtitle">Fique por dentro de todas as novidades do Tricolor das Laranjeiras</p>
+            </section>
+
+            <!-- Barra de Pesquisa -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" placeholder="Pesquisar notícias..." class="search-input">
+                        <button type="button" class="search-clear" id="searchClear" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grid de Notícias -->
+            <section class="news-grid-section">
+                <div id="loading-all-news" class="loading-news">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Carregando notícias...
+                </div>
+                <div id="all-news-grid" class="news-grid" style="display: none;">
+                    <!-- As notícias serão carregadas dinamicamente aqui -->
+                </div>
+
+                <!-- Paginação -->
+                <div class="pagination" id="pagination" style="display: none;">
+                    <button class="pagination-btn prev-btn" id="prev-btn" onclick="changePage(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Anterior</span>
+                    </button>
+                    <div class="pagination-numbers" id="pagination-numbers">
+                        <!-- Os números das páginas serão gerados dinamicamente -->
+                    </div>
+                    <button class="pagination-btn next-btn" id="next-btn" onclick="changePage(1)">
+                        <span>Próximo</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+        </main>
+
+
+    </div>
+
+    <script src="script.js"></script>
+
+
+    <script src="auth.js"></script>
+   <script>
+    const NOTICIAS_POR_PAGINA = 6;
+    let currentPage = 1;
+    let totalNoticias = 0;
+    let allNoticias = [];
+    let noticiasFiltradas = [];
+    let isFiltrando = false;
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-BR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    }
+
+    async function loadAllNoticias() {
+        try {
+            const response = await fetch('http://localhost/SiteFlu_Clean/backend/noticias.php');
+            const data = await response.json();
+
+            if (data.success && data.data) {
+                allNoticias = data.data.sort((a, b) => new Date(b.data) - new Date(a.data)); // Ordenar por data decrescente
+                totalNoticias = allNoticias.length;
+                displayPaginatedNoticias();
+                setupPagination();
+            } else {
+                showAllNewsError('Erro ao carregar notícias');
+            }
+        } catch (error) {
+            console.error('Erro ao carregar notícias:', error);
+            showAllNewsError('Erro de conexão');
+        }
+    }
+
+    function displayPaginatedNoticias() {
+        const loadingElement = document.getElementById('loading-all-news');
+        const newsGrid = document.getElementById('all-news-grid');
+
+        loadingElement.style.display = 'none';
+        newsGrid.style.display = 'grid';
+
+        const lista = isFiltrando ? noticiasFiltradas : allNoticias;
+
+        const startIndex = (currentPage - 1) * NOTICIAS_POR_PAGINA;
+        const endIndex = startIndex + NOTICIAS_POR_PAGINA;
+        const noticiasParaExibir = lista.slice(startIndex, endIndex);
+
+        newsGrid.innerHTML = '';
+
+        noticiasParaExibir.forEach((noticia, index) => {
+            const newsCard = createFullNewsCard(noticia, index === 0 && currentPage === 1 && !isFiltrando);
+            newsGrid.appendChild(newsCard);
+        });
+    }
+
+    function setupPagination() {
+        const lista = isFiltrando ? noticiasFiltradas : allNoticias;
+        const totalPages = Math.ceil(lista.length / NOTICIAS_POR_PAGINA);
+        const paginationElement = document.getElementById('pagination');
+        const paginationNumbers = document.getElementById('pagination-numbers');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        if (lista.length <= NOTICIAS_POR_PAGINA) {
+            paginationElement.style.display = 'none';
+            return;
+        }
+
+        paginationElement.style.display = 'flex';
+        paginationNumbers.innerHTML = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `pagination-btn page-number ${i === currentPage ? 'active' : ''}`;
+            pageBtn.textContent = i;
+            pageBtn.onclick = () => {
+                currentPage = i;
+                displayPaginatedNoticias();
+                setupPagination();
+            };
+            paginationNumbers.appendChild(pageBtn);
+        }
+
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPages;
+
+        prevBtn.onclick = () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPaginatedNoticias();
+                setupPagination();
+            }
+        };
+
+        nextBtn.onclick = () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayPaginatedNoticias();
+                setupPagination();
+            }
+        };
+    }
+
+    function goToPage(page) {
+        const lista = isFiltrando ? noticiasFiltradas : allNoticias;
+        const totalPages = Math.ceil(lista.length / NOTICIAS_POR_PAGINA);
+        if (page < 1 || page > totalPages) return;
+
+        currentPage = page;
+        displayPaginatedNoticias();
+        setupPagination();
+
+        document.querySelector('.news-grid-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function changePage(direction) {
+        const newPage = currentPage + direction;
+        goToPage(newPage);
+    }
+
+    function createFullNewsCard(noticia, isFeatured = false) {
+        const article = document.createElement('article');
+        article.className = isFeatured ? 'news-card featured' : 'news-card';
+
+        const imagePath = `imagens_noticias/${noticia.imagem_capa}`;
+
+        article.innerHTML = `
+            <div class="news-image">
+                <img src="${imagePath}" alt="${noticia.titulo}" onerror="this.src='news1.jpg'">
+                <div class="news-badge">${isFeatured ? 'DESTAQUE' : noticia.tema.toUpperCase()}</div>
+            </div>
+            <div class="news-content">
+                <div class="news-meta">
+                    <span class="news-date">${formatDate(noticia.data)}</span>
+                    <span class="news-category">${noticia.tema.toUpperCase()}</span>
+                </div>
+                <h${isFeatured ? '2' : '3'} class="news-title">${noticia.titulo}</h${isFeatured ? '2' : '3'}>
+                <p class="news-excerpt">${noticia.texto_resumido}</p>
+                <a href="noticia_ampliada.html?id=${noticia.id}" class="read-more">Leia mais <i class="fas fa-arrow-right"></i></a>
+            </div>
+        `;
+
+        return article;
+    }
+
+    function showAllNewsError(message) {
+        const loadingElement = document.getElementById('loading-all-news');
+        loadingElement.innerHTML = `
+            <i class="fas fa-exclamation-triangle"></i>
+            ${message}
+        `;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        loadAllNoticias();
+
+        const inputBusca = document.getElementById('searchInput');
+        const botaoClear = document.getElementById('searchClear');
+
+        inputBusca.addEventListener('input', () => {
+            const termo = inputBusca.value.trim().toLowerCase();
+            if (termo === '') {
+                isFiltrando = false;
+                noticiasFiltradas = [];
+                currentPage = 1;
+                displayPaginatedNoticias();
+                setupPagination();
+                botaoClear.style.display = 'none';
+            } else {
+                isFiltrando = true;
+                noticiasFiltradas = allNoticias.filter(noticia =>
+                    noticia.titulo.toLowerCase().includes(termo) ||
+                    noticia.tema.toLowerCase().includes(termo) ||
+                    noticia.texto_resumido.toLowerCase().includes(termo)
+                );
+                currentPage = 1;
+                displayPaginatedNoticias();
+                setupPagination();
+                botaoClear.style.display = 'inline-block';
+            }
+        });
+
+        botaoClear.addEventListener('click', () => {
+            inputBusca.value = '';
+            isFiltrando = false;
+            noticiasFiltradas = [];
+            currentPage = 1;
+            displayPaginatedNoticias();
+            setupPagination();
+            botaoClear.style.display = 'none';
+        });
+    });
+</script>
+

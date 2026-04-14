@@ -1,0 +1,1505 @@
+/* Reset básico e estilos gerais */
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 165px; /* Ajustar conforme altura final do header */
+    background-color: #f8f8f8; /* Cor de fundo mais neutra */
+    color: #333;
+    position: relative;
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/jOtcOFktZJ2a.png'); /* Escudo do Fluminense */
+    background-repeat: repeat;
+    background-size: 150px; /* Tamanho do escudo repetido */
+    opacity: 0.03; /* Opacidade muito baixa */
+    z-index: -1;
+    pointer-events: none;
+}
+
+body::after {
+    content: 'Sou Tricolor de coração. Sou do clube tantas vezes campeão. Fascina pela sua disciplina, o Fluminense me domina. Eu tenho amor ao Tricolor. Sou Tricolor de coração. Sou do clube tantas vezes campeão. Fascina pela sua disciplina, o Fluminense me domina. Eu tenho amor ao Tricolor. Sou Tricolor de coração. Sou do clube tantas vezes campeão. Fascina pela sua disciplina, o Fluminense me domina. Eu tenho amor ao Tricolor.'; /* Trecho do hino */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200%; /* Para cobrir a tela */
+    height: 200%; /* Para cobrir a tela */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 100px; /* Tamanho grande para ser sutil */
+    font-weight: 800;
+    color: rgba(135, 10, 40, 0.02); /* Grená com opacidade muito baixa */
+    text-align: center;
+    transform: translate(-50%, -50%) rotate(-15deg); /* Centraliza e rotaciona */
+    z-index: -2;
+    pointer-events: none;
+    white-space: pre; /* Preserva espaços em branco e quebras de linha */
+    line-height: 1.2;
+    word-break: break-all;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Cabeçalho Fixo */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Seção Superior do Cabeçalho (Grená) */
+.header-top {
+    background-color: #870A28;
+    color: #ffffff;
+    padding: 0 20px; /* Padding horizontal */
+    display: flex;
+    justify-content: flex-end; /* Mantém o conteúdo principal à direita */
+    align-items: center;
+    height: 45px;
+    border-bottom: 5px solid #800000;
+    position: relative;
+}
+
+.canais-sociais {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre "CANAIS OFICIAIS" e ícones */
+    margin-right: 30px; /* Aumenta o espaço entre canais e perfil */
+}
+
+.canais-sociais span {
+    font-weight: bold;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre ícones sociais */
+}
+
+.social-icons a {
+    color: #ffffff;
+    font-size: 1.1em;
+    transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: #ccc; /* Cor de hover sutil */
+}
+
+.user-actions {
+   position: relative; /* Para posicionar o menu dropdown */
+   z-index: 1002; /* Garante que o botão de perfil esteja acima do header-top base */
+}
+
+#profile-icon {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.6em; /* Ícone maior */
+    cursor: pointer;
+    padding: 0; /* Remover padding padrão */
+    display: flex; /* Para alinhar o ícone verticalmente se necessário */
+    align-items: center;
+}
+
+/* Menu dropdown com design da imagem de referência */
+.profile-menu {
+    display: none; /* Escondido por padrão */
+    position: absolute;
+    top: calc(100% + 10px); /* Espaço entre o ícone e o menu */
+    right: 0;
+    background-color: #870A28; /* Fundo grená sólido */
+    border: 2px solid #5d0719; /* Borda mais escura */
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+    z-index: 1005;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+/* Seta do menu dropdown */
+.profile-menu::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #870A28;
+    filter: drop-shadow(0 -2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.profile-menu.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.profile-menu a {
+    display: block;
+    padding: 18px 25px;
+    color: #ffffff; /* Texto branco */
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    position: relative;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.profile-menu a:last-child {
+    border-bottom: none;
+    border-radius: 0 0 13px 13px;
+}
+
+.profile-menu a:first-child {
+    border-radius: 13px 13px 0 0;
+}
+
+.profile-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    transform: none;
+}
+
+
+/* Seção Média do Cabeçalho (Branco com Logo e Título) */
+.header-middle {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    height: 60px;
+    background-color: #ffffff;
+    position: relative;
+    z-index: 2; /* Abaixo do logo e menu perfil, mas acima do header-bottom */
+}
+
+.logo-flu {
+    position: absolute;
+    height: 160px;
+    width: auto;
+    left: 25px;
+    top: -40px;
+    z-index: 3; /* Acima do header-middle */
+}
+
+.site-title {
+    font-size: 36px; /* Aumentado para mais impacto */
+    font-weight: 800; /* Mais peso */
+    padding-left: 200px;
+    /* Efeito de divisão de cores */
+    background: linear-gradient(to right, #870A28 50%, #00613C 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: 'Montserrat', sans-serif; /* Fonte mais moderna */
+    text-transform: uppercase; /* Caixa alta */
+    letter-spacing: 1px;
+}
+
+/* Seção Inferior do Cabeçalho (Verde - Navegação) */
+.header-bottom {
+    background-color: #00613C;
+    height: auto;
+    min-height: 45px;
+    padding: 5px 0;
+    border-top: 5px solid #014e31;
+    position: relative;
+    z-index: 1; /* Abaixo do header-middle e logo */
+    display: flex;
+    align-items: center;
+}
+
+.header-bottom ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    padding-left: 200px;
+}
+
+.header-bottom li {
+    margin-right: 15px;
+}
+
+.header-bottom a {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.header-bottom a i {
+    margin-right: 8px;
+}
+
+.header-bottom a:hover {
+    background-color: #007a4d; /* Verde um pouco mais claro */
+    color: #00613C; /* Texto verde escuro */
+    transform: translateY(-3px);
+    text-decoration: none;
+}
+
+/* Layout da Página com Sidebar */
+.page-container {
+    display: flex;
+    max-width: 1200px; /* Ou a largura máxima desejada */
+    margin: 0 auto; /* Centraliza o container */
+    padding: 0 15px; /* Espaçamento lateral */
+}
+
+.main-content {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    padding-right: 20px; /* Espaço entre conteúdo e sidebar */
+}
+
+/* Estilos Modernizados para a Seção de Resultados */
+.results-sidebar {
+    width: 320px; /* Largura aumentada */
+    flex-shrink: 0; /* Impede que a sidebar encolha */
+    margin-top: 20px; /* Espaço acima da sidebar */
+}
+
+.results-sidebar h2 {
+    color: #870A28; /* Grená */
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-left: 10px;
+}
+
+.results-sidebar h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #870A28;
+}
+
+/* Card de Jogo Modernizado */
+.match-card {
+    background: linear-gradient(to bottom, #ffffff, #f8f8f8); /* Gradiente muito sutil */
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.match-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.match-date-time {
+    font-size: 16px;
+    font-weight: 600;
+    color: #006633; /* Verde escuro do Fluminense */
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.match-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.match-details::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.team span {
+    font-weight: 700;
+    font-size: 16px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.team-home span {
+    color: #333; /* Cor para o time da casa */
+}
+
+.team-away span {
+    color: #870A28; /* Cor grená para o Fluminense */
+}
+
+.team img {
+    height: 55px; /* Escudos maiores */
+    width: auto;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+.team:hover img {
+    transform: scale(1.08);
+}
+
+.match-score-time {
+    font-size: 22px;
+    font-weight: 800;
+    color: #870A28; /* Grená */
+    background-color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    position: relative;
+}
+
+.nav-arrow {
+    background: none;
+    border: none;
+    color: #870A28; /* Grená */
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    z-index: 2;
+}
+
+.nav-arrow:hover {
+    background-color: rgba(135, 10, 40, 0.1);
+    transform: scale(1.1);
+}
+
+.match-location {
+    font-size: 13px;
+    color: #555;
+    margin: 15px 0;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.match-motivation {
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #870A28;
+    padding: 8px 0;
+    margin: 0 -20px -20px -20px;
+    position: relative;
+}
+
+.match-motivation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+}
+
+/* Seção de Notícias Recentes - Estilos Aprimorados */
+.section-title {
+    color: #333;
+    font-size: 28px;
+    font-weight: 800;
+    margin: 30px 0 25px;
+    position: relative;
+    padding-left: 15px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+    border-left: 5px solid #870A28;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 15px;
+    width: 80px;
+    height: 3px;
+    background-color: #00613C;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.news-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-left: 4px solid #870A28;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.news-card:nth-child(even) {
+    border-left: 4px solid #00613C;
+}
+
+.news-image {
+    position: relative;
+    overflow: hidden;
+    height: 180px;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: coverc;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-image img {
+    transform: scale(1.05);
+}
+
+.news-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.news-card:hover .news-image::after {
+    opacity: 1;
+}
+
+.news-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(135, 10, 40, 0.85);
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.news-content {
+    padding: 18px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-date {
+    color: #00613C;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    position: relative;
+    padding-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.news-date::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: #e0e0e0;
+}
+
+.news-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.4;
+    color: #333;
+    transition: color 0.2s ease;
+}
+
+.news-card:hover .news-title {
+    color: #870A28;
+}
+
+.news-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    gap: 8px;
+}
+
+.pagination-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #555;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.pagination-link:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.pagination-link.active {
+    background-color: #870A28;
+    color: white;
+}
+
+.pagination-link.next {
+    width: auto;
+    padding: 0 15px;
+    border-radius: 20px;
+}
+
+/* Banner Rotativo de Patrocinadores - Estilo Listrado Horizontal */
+.sponsors-banner {
+    width: 100%;
+    margin: 50px 0 30px;
+    background-color: #ffffff;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.sponsors-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background-color: #870A28;
+}
+
+.sponsors-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background-color: #00613C;
+}
+
+.sponsors-header {
+    display: flex;
+    justify-content: flex-start; /* Alinha o título à esquerda */
+    align-items: center;
+    padding: 20px 30px 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.sponsors-title {
+    color: #870A28;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    padding-left: 15px;
+}
+
+.sponsors-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background-color: #870A28;
+    border-radius: 3px;
+}
+
+.sponsors-carousel {
+    position: relative;
+    padding: 0 0 30px 30px; /* Ajustado para alinhar à esquerda (removido padding direito) */
+    overflow: hidden;
+}
+
+.sponsors-track {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s ease;
+    padding: 10px 0;
+    justify-content: flex-start; /* Garante alinhamento à esquerda */
+}
+
+.sponsor-item {
+    flex: 0 0 auto;
+    width: 180px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sponsor-logo {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+}
+
+.sponsor-logo::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+    transition: bottom 0.3s ease;
+    z-index: 2;
+}
+
+.sponsor-logo:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    border-color: #870A28;
+}
+
+.sponsor-logo:hover::before {
+    bottom: 0;
+}
+
+.sponsor-logo img {
+    width: 100%; /* Ocupa toda a largura */
+    height: 100%; /* Ocupa toda a altura */
+    object-fit: contain; /* Preenche tudo, pode cortar */
+    transition: transform 0.3s ease;
+}
+
+.sponsor-logo:hover img {
+    transform: scale(1.1);
+}
+
+/* Estilo original do feedback-label */
+.feedback-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #870A28;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* Espaçador */
+.spacer-lg {
+    height: 50px;
+}
+
+/* Ajustes para responsividade */
+@media (max-width: 992px) {
+    .page-container {
+        flex-direction: column; /* Empilha conteúdo e sidebar */
+    }
+    .results-sidebar {
+        width: 100%; /* Ocupa largura total */
+        margin-top: 30px;
+    }
+    .main-content {
+        padding-right: 0;
+    }
+
+    .logo-flu {
+        height: 140px;
+        top: -35px;
+        left: 20px;
+    }
+    .site-title {
+        padding-left: 170px;
+        font-size: 24px;
+    }
+    .header-bottom ul {
+        padding-left: 170px;
+    }
+    .header-bottom li {
+        margin-right: 10px;
+    }
+     .header-bottom a {
+        padding: 7px 12px;
+        font-size: 13px;
+    }
+    .canais-sociais {
+        margin-right: 20px; /* Reduzir margem */
+    }
+    
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sponsors-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    }
+    
+    .site-title {
+        font-size: 28px;
+        padding-left: 150px;
+    }
+    
+    .logo-flu {
+        height: 120px;
+        top: -30px;
+        left: 15px;
+    }
+    
+    .header-bottom ul {
+        padding-left: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .header-bottom li {
+        margin: 5px;
+    }
+    
+    .header-middle {
+        height: 50px;
+    }
+    
+    body {
+        padding-top: 155px;
+    }
+}
+
+body.login-page {
+    padding-top: 0 !important;
+}
+
+body.cadastro-page {
+    padding-top: 0 !important;
+}
+
+/* Estilos para Barra de Pesquisa */
+.search-section {
+    margin: 30px 0;
+    padding: 0 20px;
+}
+
+.search-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.search-box {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 15px 50px 15px 50px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 16px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #00613C;
+    box-shadow: 0 0 0 3px rgba(0, 97, 60, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 18px;
+}
+
+.search-clear {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.search-clear:hover {
+    background-color: #f0f0f0;
+    color: #870A28;
+}
+
+/* Estilos melhorados para Paginação */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 40px 0;
+    padding: 20px;
+}
+
+.pagination-btn {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    border: 2px solid #e0e0e0;
+    color: #333;
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 45px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #00613C 0%, #007a4d 100%);
+    color: white;
+    border-color: #00613C;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 97, 60, 0.3);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.pagination-btn.active {
+    background: linear-gradient(135deg, #870A28 0%, #a50d32 100%);
+    color: white;
+    border-color: #870A28;
+    box-shadow: 0 4px 15px rgba(135, 10, 40, 0.3);
+}
+
+.pagination-numbers {
+    display: flex;
+    gap: 8px;
+}
+
+.page-number {
+    min-width: 45px;
+    justify-content: center;
+    padding: 12px 16px;
+}
+
+.prev-btn, .next-btn {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.prev-btn i {
+    margin-right: 5px;
+}
+
+.next-btn i {
+    margin-left: 5px;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .search-box {
+        max-width: 100%;
+    }
+    
+    .search-input {
+        padding: 12px 45px 12px 45px;
+        font-size: 14px;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .pagination-btn {
+        padding: 10px 15px;
+        font-size: 12px;
+        min-height: 40px;
+    }
+    
+    .prev-btn span, .next-btn span {
+        display: none;
+    }
+    
+    .prev-btn, .next-btn {
+        padding: 10px 12px;
+    }
+}
+
+
+/* Estilos para a página de futebol interativa */
+.main-content-full {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.position-filters-section {
+    margin: 40px 0;
+    padding: 0 20px;
+}
+
+.position-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.position-btn {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    border: 2px solid #e0e0e0;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.position-btn:hover {
+    background: linear-gradient(135deg, #00613C 0%, #007a4d 100%);
+    color: white;
+    border-color: #00613C;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 97, 60, 0.3);
+}
+
+.position-btn.active {
+    background: linear-gradient(135deg, #870A28 0%, #a50d32 100%);
+    color: white;
+    border-color: #870A28;
+    box-shadow: 0 6px 20px rgba(135, 10, 40, 0.3);
+}
+
+.position-btn i {
+    font-size: 18px;
+}
+
+.players-section {
+    padding: 0 20px 60px;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Novo estilo para os cards dos jogadores baseado na imagem de referência */
+
+.player-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    border: 2px solid transparent;
+    height: 400px; /* Altura fixa para consistência */
+}
+
+.player-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    border-color: #00613C;
+}
+
+.player-image {
+    position: relative;
+    height: 280px; /* Aumentado para dar mais espaço ao jogador */
+    background-image: url('SiteFLU.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end; /* Posiciona o jogador na parte inferior */
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Overlay com gradiente intercalando grená e verde */
+.player-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(135, 10, 40, 0.7) 0%,    /* Grená */
+        rgba(0, 97, 60, 0.7) 25%,     /* Verde */
+        rgba(135, 10, 40, 0.6) 50%,   /* Grená mais claro */
+        rgba(0, 97, 60, 0.6) 75%,     /* Verde mais claro */
+        rgba(135, 10, 40, 0.7) 100%   /* Grená */
+    );
+    z-index: 1;
+}
+
+.player-image img {
+    width: 100%; /* Ocupa toda a largura do container */
+    height: 100%; /* Ocupa toda a altura do container */
+    border-radius: 0; /* Removido o círculo */
+    border: none; /* Removida a borda */
+    object-fit: cover;
+    object-position: center 0%; /* Ajustado para mostrar mais da cabeça do jogador */
+    transition: all 0.3s ease;
+    z-index: 2;
+    position: relative;
+    margin-bottom: 0; /* Removido o espaço da borda inferior */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.player-card:hover .player-image img {
+    transform: scale(1.05); /* Reduzido o zoom no hover */
+}
+
+.player-number {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #00613C;
+    width: 45px; /* Ligeiramente maior */
+    height: 45px; /* Ligeiramente maior */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px; /* Fonte maior */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    border: 2px solid rgba(0, 97, 60, 0.3);
+}
+
+.player-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('SiteFLU.png'); /* Mesmo fundo do jogador */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(8px); /* Desfoque aplicado */
+    z-index: 4;
+}
+
+/* Overlay adicional para escurecer e dar contraste ao texto */
+.player-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg, 
+        rgba(0, 97, 60, 0.85) 0%, 
+        rgba(135, 10, 40, 0.85) 100%
+    );
+    z-index: 1;
+}
+
+.player-card:hover .player-overlay {
+    opacity: 1;
+}
+
+.player-stats-detailed {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    position: relative;
+    z-index: 2; /* Garante que o texto fique acima do overlay */
+}
+
+.player-stats-detailed h4 {
+    font-size: 26px; /* Ligeiramente maior */
+    font-weight: 700;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.stat-value {
+    display: block;
+    font-size: 26px; /* Ligeiramente maior */
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.stat-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+.player-info {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    height: 120px; /* Altura fixa para a seção de informações */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.player-name {
+    font-size: 22px; /* Ligeiramente maior */
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.player-position {
+    font-size: 15px; /* Ligeiramente maior */
+    color: #00613C;
+    font-weight: 600;
+    margin: 0 0 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.player-basic-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 13px;
+    color: #666;
+}
+
+.player-basic-stats span {
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+    border-radius: 15px;
+    font-weight: 500;
+    border: 1px solid rgba(0, 97, 60, 0.1);
+}
+
+/* Animações para filtros */
+.player-card.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.player-card.visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .position-filters {
+        gap: 10px;
+    }
+    
+    .position-btn {
+        padding: 12px 18px;
+        font-size: 12px;
+    }
+    
+    .position-btn span {
+        display: none;
+    }
+    
+    .players-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .player-image {
+        height: 200px;
+    }
+    
+    .player-image img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .player-stats-detailed h4 {
+        font-size: 20px;
+    }
+    
+    .stat-value {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .players-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .position-filters {
+        justify-content: center;
+    }
+    
+    .position-btn {
+        min-width: 50px;
+        padding: 10px 15px;
+    }
+}
+
+
+/* Estilos para carregamento de notícias */
+.loading-news {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 1.1em;
+}
+
+.loading-news i {
+    margin-right: 10px;
+    color: #8B0000;
+}
+
+/* Estilos para o footer da seção de notícias */
+.news-footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.view-all-news {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #8B0000;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.view-all-news:hover {
+    background: #660000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+    color: white;
+}
+
+.view-all-news i {
+    transition: transform 0.3s ease;
+}
+
+.view-all-news:hover i {
+    transform: translateX(3px);
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .view-all-news {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+.shop-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.shop-filters .filter-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 2rem;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.shop-filters .filter-btn:hover {
+    background-color: #d3e7df;
+    color: #006644;
+}
+
+.shop-filters .filter-btn.active {
+    background-color: #900028;
+    color: #fff;
+    box-shadow: 0 0 0 2px #c3c3c3 inset;
+}

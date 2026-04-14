@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - Fluminense FC</title>
+    <!-- Adicionando Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Adicionando Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para a loja */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #8B1538, #006633);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            max-width: 220px;
+            max-height: 220px;
+            object-fit: contain;
+            filter: none;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-badge.novo {
+            background: #2ed573;
+        }
+
+        .product-badge.promocao {
+            background: #ff6b35;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            line-height: 1.3;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            margin-bottom: 1rem;
+        }
+
+        .price-current {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #8B1538;
+        }
+
+        .product-stock {
+            font-size: 0.85rem;
+            color: #27ae60;
+            margin-bottom: 1rem;
+        }
+
+        .product-stock.low {
+            color: #e67e22;
+        }
+
+        .product-stock.out {
+            color: #e74c3c;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #8B1538, #006633);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .add-to-cart:hover:not(:disabled) {
+            background: linear-gradient(135deg, #a01a42, #007a3d);
+            transform: translateY(-2px);
+        }
+
+        .add-to-cart:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
+        }
+
+        .no-products i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #bdc3c7;
+        }
+
+        /* Carrinho flutuante */
+        .cart-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #8B1538, #006633);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .cart-float:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Modal do carrinho */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+
+        .cart-modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8B1538, #006633);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .cart-item-image img {
+            max-width: 30px;
+            max-height: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            color: #8B1538;
+            font-weight: 600;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: #ecf0f1;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ecf0f1;
+            margin: 0 0.5rem;
+            padding: 0.25rem;
+            border-radius: 4px;
+        }
+
+        .cart-total {
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 2px solid #ecf0f1;
+            margin-top: 1rem;
+        }
+
+        .cart-total-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8B1538;
+        }
+
+        .cart-checkout {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #8B1538, #006633);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 2rem;
+            color: #7f8c8d;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+
+            .cart-modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-top">
+            <div class="canais-sociais">
+                <span>CANAIS OFICIAIS</span>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/fluminensefc/" target="_blank" aria-label="Instagram do Fluminense"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/fluminensefc" target="_blank" aria-label="X (Twitter ) do Fluminense"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/user/fluminensefc" target="_blank" aria-label="YouTube do Fluminense"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="user-actions">
+                <button id="profile-icon" aria-label="Menu do usuário"><i class="fas fa-user-circle"></i></button>
+                <div class="profile-menu" id="profile-menu">
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Fazer login</a>
+                    <a href="cadastro.html"><i class="fas fa-user-plus"></i> Fazer Cadastro</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle">
+            <img class="logo-flu" src="flu.png" alt="Escudo Fluminense FC">
+            <span class="site-title">FLUMINENSE FC</span>
+        </div>
+        <nav class="header-bottom">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i>HOME</a></li>
+                <li><a href="noticias.html"><i class="fas fa-newspaper"></i>NOTÍCIAS</a></li>
+                <li><a href="futebol.html"><i class="fas fa-futbol"></i>FUTEBOL</a></li>
+                <li><a href="loja.html" class="active"><i class="fas fa-shopping-cart"></i>LOJA</a></li>
+                <li><a href="clube.html"><i class="fas fa-shield-alt"></i>CLUBE</a></li>
+                <li><a href="admin.html" id="admin-link" style="display: none;"><i class="fas fa-cog"></i>ADMIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <main class="main-content">
+            <section class="page-header">
+                <h1 class="page-title">Loja Oficial</h1>
+                <p class="page-subtitle">Produtos oficiais do Tricolor das Laranjeiras</p>
+            </section>
+
+            <!-- Barra de busca e filtros -->
+            <section class="shop-controls">
+                <div class="search-bar">
+                     <input type="text" id="search-input" placeholder="Buscar produtos..." class="search-input">
+                </div>
+                
+                <div class="shop-filters">
+                    <button class="filter-btn active" data-category="todos" onclick="filtrarPorCategoria('todos', this)">Todos</button>
+                    <button class="filter-btn" data-category="camisas" onclick="filtrarPorCategoria('camisas', this)">Camisas</button>
+                    <button class="filter-btn" data-category="acessorios" onclick="filtrarPorCategoria('acessorios', this)">Acessórios</button>
+                    <button class="filter-btn" data-category="casa" onclick="filtrarPorCategoria('casa', this)">Casa & Decoração</button>
+                    <button class="filter-btn" data-category="infantil" onclick="filtrarPorCategoria('infantil', this)">Infantil</button>
+                </div>
+
+                <div class="sort-options">
+                    <select class="sort-select" id="sort-select" onchange="ordenarProdutos()">
+                        <option value="nome">Mais Relevantes</option>
+                        <option value="menor-preco">Menor Preço</option>
+                        <option value="maior-preco">Maior Preço</option>
+                        <option value="lancamentos">Lançamentos</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Banner promocional -->
+            <section class="promo-banner">
+                <div class="banner-content">
+                    <h2>NOVA COLEÇÃO 2025</h2>
+                    <p>Produtos oficiais do Tricolor das Laranjeiras</p>
+                    <button class="cta-btn" onclick="filtrarPorCategoria('camisas', document.querySelector('[data-category=\"camisas\"]'))">Ver Camisas</button>
+                </div>
+            </section>
+
+            <!-- Grid de produtos -->
+            <section class="products-section">
+                <div class="products-grid" id="products-grid">
+                    <div class="loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Carregando produtos...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Botão do carrinho flutuante -->
+    <button class="cart-float" onclick="abrirCarrinho()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cart-count">0</span>
+    </button>
+
+    <!-- Modal do carrinho -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h2>Carrinho de Compras</h2>
+                <button class="cart-close" onclick="fecharCarrinho()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <div class="cart-empty">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Seu carrinho está vazio</p>
+                </div>
+            </div>
+            <div class="cart-total" id="cart-total" style="display: none;">
+                <div class="cart-total-value">Total: R$ <span id="total-value">0,00</span></div>
+                <button class="cart-checkout" onclick="finalizarCompra()">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let produtos = [];
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        let categoriaAtual = 'todos';
+        let ordenacaoAtual = 'nome';
+
+        // Inicializar página
+        document.addEventListener('DOMContentLoaded', function () {
+    carregarProdutos();
+    atualizarContadorCarrinho();
+
+    // Busca em tempo real
+    document.getElementById('search-input').addEventListener('input', function () {
+        const busca = this.value.trim();
+        carregarProdutos(categoriaAtual, ordenacaoAtual, busca);
+    });
+});
+
+        // Carregar produtos da API
+async function carregarProdutos(categoria = 'todos', ordenacao = 'nome', busca = '') {
+    try {
+        // Caminho corrigido para uso com rota via query string
+        let url = `../backend/loja_api.php?rota=produtos&ordenacao=${ordenacao}`;
+        
+        if (categoria && categoria !== 'todos') {
+            url += `&categoria=${categoria}`;
+        }
+        
+        if (busca) {
+            url += `&busca=${busca}`;
+        }
+
+        const response = await fetch(url);
+        produtos = await response.json();
+        
+        renderizarProdutos();
+    } catch (error) {
+        console.error('Erro ao carregar produtos:', error);
+        document.getElementById('products-grid').innerHTML = `
+            <div class="no-products">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Erro ao carregar produtos. Tente novamente.</p>
+            </div>
+        `;
+    }
+}
+        // Renderizar produtos na grade
+        function renderizarProdutos() {
+            const grid = document.getElementById('products-grid');
+            
+            if (produtos.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-products">
+                        <i class="fas fa-box-open"></i>
+                        <p>Nenhum produto encontrado.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = produtos.map(produto => {
+                const estoque = produto.estoque;
+                let stockClass = '';
+                let stockText = `${estoque} em estoque`;
+                
+                if (estoque === 0) {
+                    stockClass = 'out';
+                    stockText = 'Produto esgotado';
+                } else if (estoque <= 5) {
+                    stockClass = 'low';
+                    stockText = `Últimas ${estoque} unidades`;
+                }
+
+                return `
+                    <div class="product-card" data-category="${produto.categoria}">
+                        <div class="product-image">
+                            <img src="${produto.foto_produto}" alt="${produto.nome_produto}" onerror="this.src='flu.png'">
+                            ${estoque === 0 ? '<div class="product-badge">ESGOTADO</div>' : ''}
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${produto.nome_produto}</h3>
+                            ${produto.descricao ? `<p class="product-description">${produto.descricao}</p>` : ''}
+                            <div class="product-price">
+                                <span class="price-current">R$ ${produto.valor.toFixed(2).replace('.', ',')}</span>
+                            </div>
+                            <div class="product-stock ${stockClass}">
+                                <i class="fas fa-box"></i> ${stockText}
+                            </div>
+                            <button class="add-to-cart" 
+                                    onclick="adicionarAoCarrinho(${produto.id})" 
+                                    ${estoque === 0 ? 'disabled' : ''}>
+                                ${estoque === 0 ? 'Produto Esgotado' : 'Adicionar ao Carrinho'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Filtrar por categoria
+        function filtrarPorCategoria(categoria, botao) {
+            // Atualizar botões ativos
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            botao.classList.add('active');
+            
+            categoriaAtual = categoria;
+            carregarProdutos(categoria, ordenacaoAtual);
+        }
+
+        // Ordenar produtos
+        function ordenarProdutos() {
+            const select = document.getElementById('sort-select');
+            ordenacaoAtual = select.value;
+            carregarProdutos(categoriaAtual, ordenacaoAtual);
+        }
+
+        // Buscar produtos
+        function buscarProdutos() {
+            const busca = document.getElementById('search-input').value.trim();
+            carregarProdutos(categoriaAtual, ordenacaoAtual, busca);
+        }
+
+        // Adicionar produto ao carrinho
+        function adicionarAoCarrinho(produtoId) {
+            const produto = produtos.find(p => p.id === produtoId);
+            if (!produto || produto.estoque === 0) return;
+
+            const itemExistente = carrinho.find(item => item.id === produtoId);
+            
+            if (itemExistente) {
+                if (itemExistente.quantidade < produto.estoque) {
+                    itemExistente.quantidade++;
+                } else {
+                    alert('Quantidade máxima disponível em estoque atingida.');
+                    return;
+                }
+            } else {
+                carrinho.push({
+                    id: produto.id,
+                    nome: produto.nome_produto,
+                    preco: produto.valor,
+                    foto: produto.foto_produto,
+                    quantidade: 1,
+                    estoque: produto.estoque
+                });
+            }
+
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            atualizarContadorCarrinho();
+            
+            // Feedback visual
+            const botao = event.target;
+            const textoOriginal = botao.textContent;
+            botao.textContent = 'Adicionado!';
+            botao.style.background = '#27ae60';
+            
+            setTimeout(() => {
+                botao.textContent = textoOriginal;
+                botao.style.background = '';
+            }, 1000);
+        }
+
+        // Atualizar contador do carrinho
+        function atualizarContadorCarrinho() {
+            const contador = carrinho.reduce((total, item) => total + item.quantidade, 0);
+            document.getElementById('cart-count').textContent = contador;
+            
+            if (contador === 0) {
+                document.getElementById('cart-count').style.display = 'none';
+            } else {
+                document.getElementById('cart-count').style.display = 'flex';
+            }
+        }
+
+        // Abrir modal do carrinho
+        function abrirCarrinho() {
+            renderizarCarrinho();
+            document.getElementById('cart-modal').style.display = 'block';
+        }
+
+        // Fechar modal do carrinho
+        function fecharCarrinho() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        // Renderizar itens do carrinho
+        function renderizarCarrinho() {
+            const container = document.getElementById('cart-items');
+            const totalContainer = document.getElementById('cart-total');
+            
+            if (carrinho.length === 0) {
+                container.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Seu carrinho está vazio</p>
+                    </div>
+                `;
+                totalContainer.style.display = 'none';
+                return;
+            }
+
+            container.innerHTML = carrinho.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-image">
+                        <img src="${item.foto}" alt="${item.nome}" onerror="this.src='flu.png'">
+                    </div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.nome}</div>
+                        <div class="cart-item-price">R$ ${item.preco.toFixed(2).replace('.', ',')}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn" onclick="alterarQuantidade(${item.id}, -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="quantity-input" value="${item.quantidade}" 
+                                   min="1" max="${item.estoque}" 
+                                   onchange="alterarQuantidadeInput(${item.id}, this.value)">
+                            <button class="quantity-btn" onclick="alterarQuantidade(${item.id}, 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="quantity-btn" onclick="removerDoCarrinho(${item.id})" 
+                                    style="margin-left: 1rem; background: #e74c3c; color: white;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            const total = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+            document.getElementById('total-value').textContent = total.toFixed(2).replace('.', ',');
+            totalContainer.style.display = 'block';
+        }
+
+        // Alterar quantidade do produto no carrinho
+        function alterarQuantidade(produtoId, delta) {
+            const item = carrinho.find(item => item.id === produtoId);
+            if (!item) return;
+
+            const novaQuantidade = item.quantidade + delta;
+            
+            if (novaQuantidade <= 0) {
+                removerDoCarrinho(produtoId);
+                return;
+            }
+            
+            if (novaQuantidade > item.estoque) {
+                alert('Quantidade máxima disponível em estoque atingida.');
+                return;
+            }
+
+            item.quantidade = novaQuantidade;
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            atualizarContadorCarrinho();
+            renderizarCarrinho();
+        }
+
+        // Alterar quantidade via input
+        function alterarQuantidadeInput(produtoId, novaQuantidade) {
+            const item = carrinho.find(item => item.id === produtoId);
+            if (!item) return;
+
+            novaQuantidade = parseInt(novaQuantidade) || 1;
+            
+            if (novaQuantidade <= 0) {
+                removerDoCarrinho(produtoId);
+                return;
+            }
+            
+            if (novaQuantidade > item.estoque) {
+                alert('Quantidade máxima disponível em estoque atingida.');
+                event.target.value = item.quantidade;
+                return;
+            }
+
+            item.quantidade = novaQuantidade;
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            atualizarContadorCarrinho();
+            renderizarCarrinho();
+        }
+
+        // Remover produto do carrinho
+        function removerDoCarrinho(produtoId) {
+            carrinho = carrinho.filter(item => item.id !== produtoId);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            atualizarContadorCarrinho();
+            renderizarCarrinho();
+        }
+
+        // Finalizar compra
+        function finalizarCompra() {
+            if (carrinho.length === 0) return;
+
+            const total = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+            const resumo = carrinho.map(item => `${item.nome} (${item.quantidade}x)`).join('\n');
+            
+            if (confirm(`Finalizar compra?\n\n${resumo}\n\nTotal: R$ ${total.toFixed(2).replace('.', ',')}`)) {
+                // Aqui você pode implementar a integração com gateway de pagamento
+                alert('Compra finalizada com sucesso! Obrigado por escolher o Fluminense!');
+                carrinho = [];
+                localStorage.removeItem('carrinho');
+                atualizarContadorCarrinho();
+                fecharCarrinho();
+                carregarProdutos(categoriaAtual, ordenacaoAtual); // Recarregar para atualizar estoque
+            }
+        }
+
+        // Fechar modal clicando fora
+        document.getElementById('cart-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharCarrinho();
+            }
+        });
+    </script>
+</body>
+</html>
+

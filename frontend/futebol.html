@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futebol - Fluminense FC</title>
+    <!-- Adicionando Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Adicionando Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-top">
+            <div class="canais-sociais">
+                <span>CANAIS OFICIAIS</span>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/fluminensefc/" target="_blank" aria-label="Instagram do Fluminense"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/fluminensefc" target="_blank" aria-label="X (Twitter ) do Fluminense"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/user/fluminensefc" target="_blank" aria-label="YouTube do Fluminense"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="user-actions">
+                <button id="profile-icon" aria-label="Menu do usuário"><i class="fas fa-user-circle"></i></button>
+                <div class="profile-menu" id="profile-menu">
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Fazer login</a>
+                    <a href="cadastro.html"><i class="fas fa-user-plus"></i> Fazer Cadastro</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle">
+            <img class="logo-flu" src="flu.png" alt="Escudo Fluminense FC">
+            <span class="site-title">FLUMINENSE FC</span>
+        </div>
+        <nav class="header-bottom">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i>HOME</a></li>
+                <li><a href="noticias.html"><i class="fas fa-newspaper"></i>NOTÍCIAS</a></li>
+                <li><a href="futebol.html" class="active"><i class="fas fa-futbol"></i>FUTEBOL</a></li>
+                <li><a href="loja.html"><i class="fas fa-shopping-cart"></i>LOJA</a></li>
+                <li><a href="clube.html"><i class="fas fa-shield-alt"></i>CLUBE</a></li>
+                <li><a href="admin.html" id="admin-link" style="display: none;"><i class="fas fa-cog"></i>ADMIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <main class="main-content-full">
+            <section class="page-header">
+                <h1 class="page-title">Elenco Profissional</h1>
+                <p class="page-subtitle">Conheça os guerreiros tricolores que defendem as cores do Fluminense</p>
+            </section>
+
+            <!-- Filtros por posição -->
+            <section class="position-filters-section">
+                <div class="position-filters">
+                    <button class="position-btn active" data-position="todos">
+                        <i class="fas fa-users"></i>
+                        <span>Todos</span>
+                    </button>
+                    <button class="position-btn" data-position="goleiro">
+                        <i class="fas fa-hand-paper"></i>
+                        <span>Goleiros</span>
+                    </button>
+                    <button class="position-btn" data-position="zagueiro">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Zagueiros</span>
+                    </button>
+                    <button class="position-btn" data-position="lateral">
+                        <i class="fas fa-arrows-alt-h"></i>
+                        <span>Laterais</span>
+                    </button>
+                    <button class="position-btn" data-position="meias">
+                        <i class="fas fa-circle"></i>
+                        <span>Meio-campo</span>
+                    </button>
+                    <button class="position-btn" data-position="atacantes">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Atacantes</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Grid de jogadores -->
+            <section class="players-section">
+                <div class="players-grid">
+                    <!-- Os jogadores serão carregados dinamicamente via JavaScript -->
+                    <div class="loading-message">
+                        <p>Carregando elenco...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="elenco.js"></script>
+</body>
+</html>
+

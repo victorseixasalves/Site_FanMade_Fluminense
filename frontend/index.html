@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluminense FC - Atividade</title>
+    <!-- Adicionando Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Adicionando Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-top">
+            <div class="canais-sociais">
+                <span>CANAIS OFICIAIS</span>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/fluminensefc/" target="_blank" aria-label="Instagram do Fluminense"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/fluminensefc" target="_blank" aria-label="X (Twitter ) do Fluminense"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/user/fluminensefc" target="_blank" aria-label="YouTube do Fluminense"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="user-actions">
+                <button id="profile-icon" aria-label="Menu do usuário"><i class="fas fa-user-circle"></i></button>
+                <div class="profile-menu" id="profile-menu">
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Fazer login</a>
+                    <a href="cadastro.html"><i class="fas fa-user-plus"></i> Fazer Cadastro</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="header-middle">
+            <img class="logo-flu" src="flu.png" alt="Escudo Fluminense FC">
+            <span class="site-title">FLUMINENSE FC</span>
+        </div>
+        <nav class="header-bottom">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i>HOME</a></li>
+                <li><a href="noticias.html"><i class="fas fa-newspaper"></i>NOTÍCIAS</a></li>
+                <li><a href="futebol.html"><i class="fas fa-futbol"></i>FUTEBOL</a></li>
+                <li><a href="loja.html"><i class="fas fa-shopping-cart"></i>LOJA</a></li>
+                <li><a href="clube.html"><i class="fas fa-shield-alt"></i>CLUBE</a></li>
+                <li><a href="admin.html" id="admin-link" style="display: none;"><i class="fas fa-cog"></i>ADMIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <main class="main-content">
+
+            <!-- Seção de Notícias Recentes -->
+            <section class="news-section">
+                <h2 class="section-title">Notícias Recentes</h2>
+                <div id="loading-news" class="loading-news">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Carregando notícias...
+                </div>
+                <div id="news-grid" class="news-grid" style="display: none;">
+                    <!-- As notícias serão carregadas dinamicamente aqui -->
+                </div>
+                <div class="news-footer">
+                    <a href="noticias.html" class="view-all-news">
+                        Ver todas as notícias
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <aside class="results-sidebar">
+            <h2>RESULTADOS:</h2>
+            <div class="match-card">
+                <div class="match-date-time">TER, 11/06/2024 - 20:00</div>
+                <div class="match-details">
+                    <button class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                    <div class="team team-home">
+                        <img src="galo.png" alt="Escudo CAM">
+                        <span>CAM</span>
+                    </div>
+                    <div class="match-score-time">20:00</div>
+                    <div class="team team-away">
+                        <img src="flu.png" alt="Escudo FLU">
+                        <span>FLU</span>
+                    </div>
+                    <button class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="match-location">TOCA DA RAPOSA 4 - BELO HORIZONTE - MG</div>
+                <div class="match-motivation">VAMOS TRICOLORES!</div>
+            </div>
+        </aside>
+    </div>
+
+    <div class="spacer-lg"></div>
+
+    <!-- Banner Rotativo de Patrocinadores-->
+    <section class="sponsors-banner">
+        <div class="sponsors-header">
+            <h2 class="sponsors-title">PATROCINADORES OFICIAIS</h2>
+        </div>
+        <div class="sponsors-carousel">
+            <div class="sponsors-track">
+
+                <!-- Patrocinador 1 -->
+                <div class="sponsor-item">
+                    <a href="https://www.umbro.com.br" target="_blank" class="sponsor-logo" data-tooltip="Fornecedor oficial de material esportivo">
+                        <img src="./Patrocinadores/umbro.png" alt="Umbro">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 2 -->
+                <div class="sponsor-item">
+                    <a href="https://www.superbet.com.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador master">
+                        <img src="./Patrocinadores/superbet.png" alt="Superbet">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 3 -->
+                <div class="sponsor-item">
+                    <a href="https://www.frescatto.com.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/frescatto.png" alt="Frescatto">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 4 -->
+                <div class="sponsor-item">
+                    <a href="https://www.brahma.com.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/brahma.png" alt="Brahma">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 5 -->
+                <div class="sponsor-item">
+                    <a href="https://www.orthopride.com.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/orthopride.png" alt="OrthoPride">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 6 -->
+                <div class="sponsor-item">
+                    <a href="https://www.zinzane.com.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/zinzane.png" alt="Zinzane">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 7 -->
+                <div class="sponsor-item">
+                    <a href="https://www.forcamaxima.com.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/forcamaxima.png" alt="Força Máxima">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 8 -->
+                <div class="sponsor-item">
+                    <a href="https://www.predialnet.com.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/predialnet.png" alt="Predialnet">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 9 -->
+                <div class="sponsor-item">
+                    <a href="https://www.fecomercio-rj.org.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/fecomercio.png" alt="Fecomércio RJ">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 10 -->
+                <div class="sponsor-item">
+                    <a href="https://www.unig.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/unig.png" alt="UNIG">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 11 -->
+                <div class="sponsor-item">
+                    <a href="https://www.biofios.com.br" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/biofios.png" alt="Biofios">
+                    </a>
+                </div>
+
+                <!-- Patrocinador 12 -->
+                <div class="sponsor-item">
+                    <a href="https://www.ze.delivery" target="_blank" class="sponsor-logo" data-tooltip="Patrocinador oficial">
+                        <img src="./Patrocinadores/zedelivery.png" alt="Zé Delivery">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+   <script>
+    // Função para formatar data
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-BR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    }
+
+    // Função para carregar notícias recentes
+    async function loadNoticiasRecentes() {
+        try {
+            const response = await fetch('http://localhost/SiteFlu_Clean/backend/noticias.php');
+            const data = await response.json();
+
+            if (data.success && data.data) {
+                // Ordenar por data decrescente
+                const noticiasOrdenadas = data.data.sort((a, b) => new Date(b.data) - new Date(a.data));
+                // Pegar apenas as 4 mais recentes
+                const noticiasRecentes = noticiasOrdenadas.slice(0, 4);
+                displayNoticias(noticiasRecentes);
+            } else {
+                showNewsError('Erro ao carregar notícias');
+            }
+        } catch (error) {
+            console.error('Erro ao carregar notícias:', error);
+            showNewsError('Erro de conexão');
+        }
+    }
+
+    // Função para exibir as notícias
+    function displayNoticias(noticias) {
+        const loadingElement = document.getElementById('loading-news');
+        const newsGrid = document.getElementById('news-grid');
+
+        loadingElement.style.display = 'none';
+        newsGrid.style.display = 'grid';
+        newsGrid.innerHTML = '';
+
+        noticias.forEach(noticia => {
+            const newsCard = createNewsCard(noticia);
+            newsGrid.appendChild(newsCard);
+        });
+    }
+
+    // Função para criar um card de notícia
+    function createNewsCard(noticia) {
+        const card = document.createElement('a');
+        card.href = `noticia_ampliada.html?id=${noticia.id}`;
+        card.className = 'news-card';
+
+        const imagePath = `imagens_noticias/${noticia.imagem_capa}`;
+
+        card.innerHTML = `
+            <div class="news-image">
+                <img src="${imagePath}" alt="${noticia.titulo}" onerror="this.src='news1.jpg'">
+                <div class="news-badge">
+                    ${noticia.tema.toUpperCase()}
+                </div>
+            </div>
+            <div class="news-content">
+                <div class="news-date">${formatDate(noticia.data)}</div>
+                <h3 class="news-title">${noticia.titulo}</h3>
+            </div>
+        `;
+
+        return card;
+    }
+
+    // Função para exibir erro
+    function showNewsError(message) {
+        const loadingElement = document.getElementById('loading-news');
+        loadingElement.innerHTML = `
+            <i class="fas fa-exclamation-triangle"></i>
+            ${message}
+        `;
+    }
+
+    // Carregar notícias quando a página carregar
+    document.addEventListener('DOMContentLoaded', function () {
+        loadNoticiasRecentes();
+    });
+</script>
+</body>
+</html>
